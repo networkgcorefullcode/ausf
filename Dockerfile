@@ -19,9 +19,11 @@ RUN apt-get update && \
     libyaml-dev && \
     apt-get clean
 
+RUN go install github.com/go-task/task/v3/cmd/task@latest
+
 WORKDIR $GOPATH/src/ausf
 COPY . .
-RUN make all
+RUN task build
 
 FROM alpine:3.22 AS ausf
 
