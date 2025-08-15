@@ -79,7 +79,9 @@ func InitAusfContext(context *AUSFContext) {
 	AddNfServices(&context.NfService, &config, context)
 	logger.ContextLog.Infoln("ausf context:", context)
 
-	ausfContext.ManualConfig = configuration.ManualConfigs
+	if configuration.ManualConfigs != nil {
+		ausfContext.ManualConfig = configuration.ManualConfigs
+	}
 
 }
 
