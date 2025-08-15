@@ -11,6 +11,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/omec-project/ausf/factory"
 	"github.com/omec-project/ausf/logger"
 	"github.com/omec-project/openapi/models"
 )
@@ -34,6 +35,8 @@ type AUSFContext struct {
 	SBIPort                  int
 	EnableNrfCaching         bool
 	NrfCacheEvictionInterval time.Duration
+
+	ManualConfig *factory.ManualConfig
 }
 
 type AusfUeContext struct {
