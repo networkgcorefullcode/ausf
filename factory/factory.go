@@ -36,6 +36,17 @@ func InitConfigFactory(f string) error {
 		logger.CfgLog.Infof("webuiUri not set in configuration file. Using %v", AusfConfig.Configuration.WebuiUri)
 		return nil
 	}
+
+	if AusfConfig.Configuration.ManualConfigs != nil {
+		logger.CfgLog.Infof("Manual Configuration provided for network functions")
+		for nfType, nfs := range AusfConfig.Configuration.ManualConfigs.NFs {
+			for _, nf := range nfs {
+				logger.CfgLog.Debugf("Manual Configuration - NF Type: %s, Name: %s, URL: %s, Port: %d", nfType, nf.NfInstanceName, nf.NfServices)
+			}
+		}
+	} else {
+		logger.CfgLog.Infof("No manual configuration provided for network functions")
+	}
 	err = validateWebuiUri(AusfConfig.Configuration.WebuiUri)
 	return err
 }
