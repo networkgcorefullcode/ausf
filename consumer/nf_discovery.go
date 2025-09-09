@@ -12,6 +12,7 @@ import (
 
 	ausfContext "github.com/omec-project/ausf/context"
 	"github.com/omec-project/ausf/logger"
+	"github.com/omec-project/ausf/util"
 	"github.com/omec-project/openapi/Nnrf_NFDiscovery"
 	"github.com/omec-project/openapi/models"
 	nrfCache "github.com/omec-project/openapi/nrfcache"
@@ -27,6 +28,13 @@ var (
 var SendSearchNFInstances = func(nrfUri string, targetNfType, requestNfType models.NfType,
 	param *Nnrf_NFDiscovery.SearchNFInstancesParamOpts,
 ) (models.SearchResult, error) {
+	if ausfContext.GetSelf().ManualConfig != nil && ausfContext.GetSelf().ManualConfig.Enabled {
+		// Use manual configuration
+		result, err := util.SearchNFInstancesWithManualConfig(ausfContext.GetSelf().ManualConfig, targetNfType, requestNfType, param)
+		if err == nil && len(result.NfInstances) > 0 {
+			return result, nil
+		}
+	}
 	if ausfContext.GetSelf().EnableNrfCaching {
 		return NRFCacheSearchNFInstances(nrfUri, targetNfType, requestNfType, param)
 	} else {
