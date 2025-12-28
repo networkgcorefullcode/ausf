@@ -78,6 +78,11 @@ func InitAusfContext(context *AUSFContext) {
 	context.NfService = make(map[models.ServiceName]models.NfService)
 	AddNfServices(&context.NfService, &config, context)
 	logger.ContextLog.Infoln("ausf context:", context)
+
+	if configuration.ManualConfigs != nil {
+		ausfContext.ManualConfig = configuration.ManualConfigs
+	}
+
 }
 
 func AddNfServices(serviceMap *map[models.ServiceName]models.NfService, config *factory.Config, context *AUSFContext) {

@@ -3,12 +3,14 @@
 
 configuration:
   groupId: ausfGroup001
-  nrfUri: http://nrf:8081
+  nrfUri: http://localhost:29000
+  metricsPort: ":9912"
+  webuiUri: http://localhost:5001
   sbi:
     bindingIPv4: 0.0.0.0
     port: 29509
-    registerIPv4: 1.1.1.1
-    scheme: https
+    registerIPv4: 172.28.31.5
+    scheme: http
     tls: # the local path of TLS key
       key: /support/TLS/ausf.pem # AUSF TLS Certificate
       pem: /support/TLS/ausf.pem # AUSF TLS Private key
@@ -17,5 +19,3 @@ configuration:
 info:
   description: AUSF initial local configuration
   version: 1.0.0
-
-

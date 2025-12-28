@@ -43,6 +43,10 @@ type Configuration struct {
 	GroupId                  string   `yaml:"groupId,omitempty"`
 	EnableNrfCaching         bool     `yaml:"enableNrfCaching"`
 	NrfCacheEvictionInterval int      `yaml:"nrfCacheEvictionInterval,omitempty"`
+	MetricsPort              string   `yaml:"metricsPort,omitempty"`
+
+	// Manual Configuration to connect with network functions
+	ManualConfigs *ManualConfig `yaml:"manualConfigs,omitempty"`
 }
 
 type Sbi struct {
