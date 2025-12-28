@@ -16,3 +16,13 @@ include:
         when: always
       - if: '$CI_COMMIT_REF_NAME == "dev"'
         when: always
+initJob:
+  stage: init
+  tags:
+    - doks
+  script:
+    - echo "hello world"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: '$CI_COMMIT_REF_NAME == "main" || $CI_COMMIT_REF_NAME == "dev"'
+      when: always
